@@ -3,9 +3,11 @@ import Axios from 'axios';
 import { render } from 'react-dom';
 import { Redirect } from 'react-router-dom';
 import Nav from '../Components/Nav';
+
 function Admin() {
     let auth = localStorage.getItem('auth');
-    if(auth === 0 || auth === '' || auth === null || auth === undefined){
+    console.log(auth);
+    if(auth === '0' || auth === '' || auth === null || auth === undefined){
         return <Redirect to="/" />
     }
 
