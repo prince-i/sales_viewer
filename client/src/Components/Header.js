@@ -3,7 +3,7 @@ import React from 'react';
 class Header extends React.Component{
     render(){
         return(
-            <nav className="blue z-depth-3 flow-text">SALES INFORMATION VIEWER SYSTEM &copy; 2022</nav>
+            <nav className="blue z-depth-3 flow-text center">SALES INFORMATION VIEWER SYSTEM &copy; 2022</nav>
         );
     }
 }
