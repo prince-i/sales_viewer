@@ -3,14 +3,14 @@ import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-ro
 import M from 'materialize-css';
 
 class Nav extends Component {
+  
     componentDidMount() {
         let elems = document.querySelectorAll('.dropdown-trigger');
         M.Dropdown.init(elems, {inDuration: 300, outDuration: 225,constrainWidth:false});
     }
     Logout = () =>{
-        console.log('logout');
+        // console.log('logout');
         localStorage.setItem('auth','0');
-       
     }
 render(){
     return (
@@ -28,7 +28,7 @@ render(){
                        <a href='#' className='dropdown-trigger' data-target='account_settings'>Account</a>
                        <ul id='account_settings' className='dropdown-content'>
                         <li><a href="">Account Settings</a></li>
-                        <li><a href="/admin" onClick={this.Logout}>Logout</a></li>
+                        <li><a href="" onClick={this.Logout}>Logout</a></li>
                         </ul>
                     </li>
                    </ul>

@@ -14,7 +14,7 @@ function Admin() {
     return(
         <div className='admin'>
              <Nav/>
-             <h1 className='center'>HANEP KA</h1>
+             <h1 className='center'>DASHBOARD</h1>
         </div>
       
     )    
