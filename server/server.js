@@ -27,6 +27,23 @@ app.post('/login',(req,res) => {
         });
 });
 
+app.post('/validate_session',(req,res) => {
+    const user = req.body.usernameStr;
+    const VERIFY_USER = `SELECT id,name FROM accounts WHERE username = ?`;
+    connection.query(VERIFY_USER,[user],
+        (err,result) => {
+            if(err){
+                res.send({err:err});
+            }
+            if(result.length > 0 ){
+                res.send(result);
+            }else{
+                res.send({message: "invalid"});
+            }
+        });
+});
+
+
 // app.get('/tasks',(req,res)=>{
 //     const TASK_QUERY = `SELECT *FROM task`;
 //     connection.query(TASK_QUERY, (err,response)=>{

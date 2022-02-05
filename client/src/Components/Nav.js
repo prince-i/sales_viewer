@@ -12,6 +12,7 @@ class Nav extends Component {
         // console.log('logout');
         localStorage.setItem('auth','0');
     }
+
 render(){
     return (
             <nav className='blue z-depth-2'>
@@ -25,7 +26,7 @@ render(){
                        <Link to="/sales">Sales Report</Link>
                    </li>
                    <li>
-                       <a href='#' className='dropdown-trigger' data-target='account_settings'>Account</a>
+                       <a href='#' className='dropdown-trigger' data-target='account_settings' id='acctname'>Account</a>
                        <ul id='account_settings' className='dropdown-content'>
                         <li><a href="">Account Settings</a></li>
                         <li><a href="" onClick={this.Logout}>Logout</a></li>

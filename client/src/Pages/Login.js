@@ -27,6 +27,13 @@ function Login(){
                }else{
                 setLoginStatus(response.data[0].username)
                 localStorage.setItem('auth','1');
+                // CONVERT USERNAME STRING TO HEX
+                let usernameHex = response.data[0].username;
+                var hex = '';
+                for(var i=0;i<usernameHex.length;i++) {
+                    hex += ''+usernameHex.charCodeAt(i).toString(16);
+                }
+                localStorage.setItem('username',hex);
                 history.push("/admin");
                }
             });
