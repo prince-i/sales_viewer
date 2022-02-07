@@ -48,7 +48,7 @@ function Sales() {
         .then((response) => setSalesData(response));
     }
     
-    console.table(salesData);
+    // console.table(salesData);
     return(
         <div className='admin'>
              <Nav/>
@@ -89,8 +89,8 @@ function Sales() {
                             <tbody>
                                     {
                                         salesData.map((row) =>(
-                                            <tr>
-                                            <td>{row.number}</td>
+                                            <tr key={row.ID}>
+                                            <td>{row.ID}</td>
                                             <td>{row.REF_CODE}</td>
                                             <td>{row.REF_NAME}</td>
                                             <td>{row.COST_AMT}</td>
