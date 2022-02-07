@@ -32,8 +32,6 @@ function Sales() {
             if(response.data.message){
                 localStorage.setItem('auth','0');
             }else{
-                // console.log(response.data[0].id);
-                // console.log(response.data[0].name);
                 document.querySelector("#acctname").innerHTML = response.data[0].name;
             }
            
@@ -48,6 +46,36 @@ function Sales() {
         .then((response) => setSalesData(response));
     }
     
+    const export_sales = () => {
+        let separator = ',';
+        let table_id = 'salesTable';
+        var rows = document.querySelectorAll('table#' + table_id + ' tr');
+        // Construct csv
+        if(rows.length > 1){
+            var csv = [];
+        for (var i = 0; i < rows.length; i++) {
+            var row = [], cols = rows[i].querySelectorAll('td, th');
+            for (var j = 0; j < cols.length; j++) {
+                var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
+                data = data.replace(/"/g, '""');
+                // Push escaped string
+                row.push('"' + data + '"');
+            }
+            csv.push(row.join(separator));
+        }
+        var csv_string = csv.join('\n');
+        // Download it
+        var filename = 'Sales_Viewer'+ '_' + new Date().toLocaleDateString() + '.csv';
+        var link = document.createElement('a');
+        link.style.display = 'none';
+        link.setAttribute('target', '_blank');
+        link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string));
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        }
+    }
     // console.table(salesData);
     return(
         <div className='admin'>
@@ -67,13 +95,16 @@ function Sales() {
                         <label>To</label>
                     </div>
 
-                    <div className='input-field col s12 l4'>
+                    <div className='input-field col s12 l2'>
                        <button className='btn blue z-depth-1 col s12' onClick={sales}>Search</button>
+                    </div>
+                    <div className='input-field col s12 l2'>
+                       <button className='btn #0d47a1 blue darken-4 z-depth-1 col s12' onClick={export_sales}>export</button>
                     </div>
 
                     {/* TABLE */}
                     <div className='col s12'>
-                        <table className='center'>
+                        <table className='center' id='salesTable'>
                             <thead>
                                 <tr>
                                 <th>#</th>
