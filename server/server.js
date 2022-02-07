@@ -44,6 +44,25 @@ app.post('/validate_session',(req,res) => {
 });
 
 
+app.post('/sales_rpt',(req,res)=>{
+    const fromDT = req.body.from;
+    const toDT = req.body.to;
+    const SALES_QUERY = `SELECT master_item.ref_cd as REF_CODE, master_item.ref_nm as REF_NAME, pos_sales.cost_am as COST_AMT, pos_sales.price_am as PRICE_AMT, pos_sales.qty_am as QTY_AMT, tran_dt as TRANSAC_DATE, master_client.ref_nm as CLIENT FROM master_item LEFT JOIN pos_sales ON master_item.id_no = pos_sales.itemid_no LEFT JOIN master_client ON pos_sales.clientid_no = master_client.id_no
+    WHERE tran_dt >= ? AND tran_dt <= ?`;
+    connection.query(SALES_QUERY,[fromDT,toDT],
+        (err,result) => {
+            if(err){
+                res.send({err:err});
+            }
+            if(result.length > 0){
+                res.send(result);
+            }else{
+                res.send(result);
+            }
+        });
+
+});
+
 // app.get('/tasks',(req,res)=>{
 //     const TASK_QUERY = `SELECT *FROM task`;
 //     connection.query(TASK_QUERY, (err,response)=>{

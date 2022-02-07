@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
-import { render } from 'react-dom';
 import { Redirect } from 'react-router-dom';
 import Nav from '../Components/Nav';
-import Search from '../Components/Searchsales';
+
 function Sales() {
+
+    let today = new Date().toISOString().slice(0, 10)
+    const [from, setFromDT] = useState(today);
+    const [to, setToDT] = useState(today);
+    const [salesData, setSalesData] = useState([]);
+
     let auth = localStorage.getItem('auth');
     // console.log(auth);
     let username = localStorage.getItem('username');
@@ -35,11 +40,75 @@ function Sales() {
         });
     }
 
+    const sales = () =>{
+        Axios.post('http://localhost:4000/sales_rpt',{
+            from: from,
+            to:to
+        }).then((response) => response.data)
+        .then((response) => setSalesData(response));
+    }
+    
+    console.table(salesData);
     return(
         <div className='admin'>
              <Nav/>
              <h1 className='center'>SALES</h1>
-            <Search/>
+             <div className='row'>
+                <div className='col s12'>
+                    <div className='input-field col s12 l4'>
+                        <input type="date" className="" id="from" value={from} onChange={(e) => setFromDT(e.target.value)}/>
+                        <label>From</label>
+                    </div>
+
+                    <div className='input-field col s12 l4'>
+                        <input type="date" className="" id="to"   
+                        value={to} onChange={(e) => setToDT(e.target.value)}
+                        />
+                        <label>To</label>
+                    </div>
+
+                    <div className='input-field col s12 l4'>
+                       <button className='btn blue z-depth-1 col s12' onClick={sales}>Search</button>
+                    </div>
+
+                    {/* TABLE */}
+                    <div className='col s12'>
+                        <table className='center'>
+                            <thead>
+                                <tr>
+                                <th>#</th>
+                                <th>ITEM CODE</th>
+                                <th>ITEM NAME</th>
+                                <th>COST AMT.</th>
+                                <th>PRICE AMT.</th>
+                                <th>QTY. AMT.</th>
+                                <th>TRANSACTION DATE</th>
+                                <th>CLIENT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {
+                                        salesData.map((row) =>(
+                                            <tr>
+                                            <td>{row.number}</td>
+                                            <td>{row.REF_CODE}</td>
+                                            <td>{row.REF_NAME}</td>
+                                            <td>{row.COST_AMT}</td>
+                                            <td>{row.PRICE_AMT}</td>
+                                            <td>{row.QTY_AMT}</td>
+                                            <td>{
+                                                    (row.TRANSAC_DATE).split('T')[0]
+                                                }
+                                            </td>
+                                            <td>{row.CLIENT}</td> 
+                                        </tr>
+                                        ))
+                                    }
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
       
     )    
