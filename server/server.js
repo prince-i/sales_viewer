@@ -47,7 +47,7 @@ app.post('/validate_session',(req,res) => {
 app.post('/sales_rpt',(req,res)=>{
     const fromDT = req.body.from;
     const toDT = req.body.to;
-    const SALES_QUERY = `SELECT pos_sales.id_no as ID, master_item.ref_cd as REF_CODE, master_item.ref_nm as REF_NAME, pos_sales.cost_am as COST_AMT, pos_sales.price_am as PRICE_AMT, pos_sales.qty_am as QTY_AMT, tran_dt as TRANSAC_DATE, master_client.ref_nm as CLIENT FROM master_item LEFT JOIN pos_sales ON master_item.id_no = pos_sales.itemid_no LEFT JOIN master_client ON pos_sales.clientid_no = master_client.id_no
+    const SALES_QUERY = `SELECT pos_sales.id_no as ID,master_item.ref_cd as REF_CODE, master_item.ref_nm as REF_NAME, pos_sales.cost_am as COST_AMT, pos_sales.price_am as PRICE_AMT, pos_sales.qty_am as QTY_AMT, tran_dt as TRANSAC_DATE, master_client.ref_nm as CLIENT, master_location.ref_cd AS BRANCH_CODE, master_location.address_tx as BRANCH_ADDRESS, master_location.ref_nm as BRANCH_NAME FROM master_item LEFT JOIN pos_sales ON master_item.id_no = pos_sales.itemid_no LEFT JOIN master_client ON pos_sales.clientid_no = master_client.id_no LEFT JOIN master_location ON pos_sales.locid_no = master_location.id_no
     WHERE tran_dt >= ? AND tran_dt <= ? ORDER BY pos_sales.id_no ASC`;
     connection.query(SALES_QUERY,[fromDT,toDT],
         (err,result) => {

@@ -115,6 +115,9 @@ function Sales() {
                                 <th>QTY. AMT.</th>
                                 <th>TRANSACTION DATE</th>
                                 <th>CLIENT</th>
+                                <th>BRANCH CODE</th>
+                                <th>BRANCH ADDRESS</th>
+                                <th>BRANCH NAME</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -131,7 +134,10 @@ function Sales() {
                                                     (row.TRANSAC_DATE).split('T')[0]
                                                 }
                                             </td>
-                                            <td>{row.CLIENT}</td> 
+                                            <td>{row.CLIENT}</td>
+                                            <td>{row.BRANCH_CODE}</td>
+                                            <td>{row.BRANCH_ADDRESS}</td>
+                                            <td>{row.BRANCH_NAME}</td>
                                         </tr>
                                         ))
                                     }
