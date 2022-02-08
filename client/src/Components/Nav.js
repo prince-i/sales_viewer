@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import M from 'materialize-css';
 
 class Nav extends Component {
@@ -28,8 +28,8 @@ render(){
                    <li>
                        <a href='#' className='dropdown-trigger' data-target='account_settings' id='acctname'>Account</a>
                        <ul id='account_settings' className='dropdown-content'>
-                        <li><a href="">Account Settings</a></li>
-                        <li><a href="" onClick={this.Logout}>Logout</a></li>
+                        <li><a href="#">Account Settings</a></li>
+                        <li><a href="#" onClick={this.Logout}>Logout</a></li>
                         </ul>
                     </li>
                    </ul>

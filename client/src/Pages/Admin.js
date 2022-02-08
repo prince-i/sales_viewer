@@ -1,8 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
-import { render } from 'react-dom';
+// import { render } from 'react-dom';
 import { Redirect } from 'react-router-dom';
 import Nav from '../Components/Nav';
+// import SampleChart from '../Components/BarChart';
 
 function Admin() {
     let auth = localStorage.getItem('auth');
@@ -39,6 +40,7 @@ function Admin() {
         <div className='admin'>
              <Nav/>
              <h1 className='center'>DASHBOARD</h1>
+            
         </div>
       
     )    
