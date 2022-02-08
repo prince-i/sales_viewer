@@ -63,6 +63,40 @@ app.post('/sales_rpt',(req,res)=>{
 
 });
 
+app.post('/client_cnt',(req,res) =>{
+    const CLIENT_QUERY = `SELECT COUNT(id_no) as CLIENT_CNT FROM master_client`;
+    connection.query(CLIENT_QUERY,(err,result) =>{
+        if(err) console.log(err)
+        else res.send(result);
+    })
+});
+
+app.post('/branches_cnt',(req,res) =>{
+    const BRANCH_QUERY = `SELECT COUNT(id_no) as BRANCH_CNT FROM master_location`;
+    connection.query(BRANCH_QUERY,(err,result) =>{
+        if(err) console.log(err)
+        else res.send(result);
+    })
+});
+
+app.post('/items_cnt',(req,res) =>{
+    const ITEM_QUERY = `SELECT COUNT(id_no) as ITEM_CNT FROM master_item`;
+    connection.query(ITEM_QUERY,(err,result) =>{
+        if(err) console.log(err)
+        else res.send(result);
+    })
+});
+
+app.post('/trans_cnt',(req,res) =>{
+    const TRANSAC_QUERY = `SELECT COUNT(id_no) as TRANSAC_CNT FROM pos_sales`;
+    connection.query(TRANSAC_QUERY,(err,result) =>{
+        if(err) console.log(err)
+        else res.send(result);
+    })
+});
+
+
+
 // app.get('/tasks',(req,res)=>{
 //     const TASK_QUERY = `SELECT *FROM task`;
 //     connection.query(TASK_QUERY, (err,response)=>{
