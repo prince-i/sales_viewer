@@ -95,7 +95,13 @@ app.post('/trans_cnt',(req,res) =>{
     })
 });
 
-
+app.post('/chart_sales_per_branch',(req,res) => {
+    const SALES_BRANCH = `SELECT master_location.ref_nm as BRANCH, sum(pos_sales.price_am) as SALES FROM master_location LEFT JOIN pos_sales ON master_location.id_no = pos_sales.locid_no GROUP BY master_location.id_no ORDER BY pos_sales.price_am ASC`;
+    connection.query(SALES_BRANCH,(err,result) =>{
+        if(err) console.log(err)
+        else res.send(result);
+    });
+})
 
 // app.get('/tasks',(req,res)=>{
 //     const TASK_QUERY = `SELECT *FROM task`;

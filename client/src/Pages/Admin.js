@@ -3,7 +3,7 @@ import Axios from 'axios';
 // import { render } from 'react-dom';
 import { Redirect } from 'react-router-dom';
 import Nav from '../Components/Nav';
-// import SampleChart from '../Components/BarChart';
+import SampleChart from '../Components/BarGraph';
 
 function Admin() {
     const [clients,SetClient] = useState('0');
@@ -100,6 +100,7 @@ function Admin() {
                     </div>
                 </div>
             </div>
+            <SampleChart/>
         </div>
       
     )    
