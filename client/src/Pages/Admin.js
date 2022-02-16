@@ -36,26 +36,28 @@ function Admin() {
         });
     }
 
-    Axios.post('http://localhost:4000/client_cnt')
-    .then((response) =>{
-        SetClient(response.data[0].CLIENT_CNT);
-    });
+    setTimeout(() => {
+        Axios.post('http://localhost:4000/client_cnt')
+        .then((response) =>{
+            SetClient(response.data[0].CLIENT_CNT);
+        });
 
-    Axios.post('http://localhost:4000/branches_cnt')
-    .then((response) =>{
-        // console.log(response.data);
-        setBranches(response.data[0].BRANCH_CNT);
-    });
+        Axios.post('http://localhost:4000/branches_cnt')
+        .then((response) =>{
+            // console.log(response.data);
+            setBranches(response.data[0].BRANCH_CNT);
+        });
 
-    Axios.post('http://localhost:4000/items_cnt')
-    .then((response) =>{
-        setItemsCnt(response.data[0].ITEM_CNT);
-    });
+        Axios.post('http://localhost:4000/items_cnt')
+        .then((response) =>{
+            setItemsCnt(response.data[0].ITEM_CNT);
+        });
 
-    Axios.post('http://localhost:4000/trans_cnt')
-    .then((response) =>{
-        setTransaction(response.data[0].TRANSAC_CNT);
-    });
+        Axios.post('http://localhost:4000/trans_cnt')
+        .then((response) =>{
+            setTransaction(response.data[0].TRANSAC_CNT);
+        });
+    }, 1000);
 
     return(
         <div className='admin'>

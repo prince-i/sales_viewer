@@ -6,10 +6,12 @@ function BarGraph(){
 // console.log(branch_sales_data);
 const [branch_sales_data,setBranchSales] = useState([]);
 
-Axios.post('http://localhost:4000/chart_sales_per_branch')
-.then((response) =>{
-  setBranchSales(response.data);
-});
+setTimeout(() => {
+  Axios.post('http://localhost:4000/chart_sales_per_branch')
+  .then((response) =>{
+    setBranchSales(response.data);
+  });
+},1000)
 
   return (
     <div className="row">
@@ -17,7 +19,7 @@ Axios.post('http://localhost:4000/chart_sales_per_branch')
         <div className='col s12 l6 m6'>
             <div className='card'>
               <div className='card-content'>
-                <h5>ALL-TIME SALES</h5>
+                <h5>ALL-TIME SALES REPORT</h5>
                   <BarChart width={600} height={300} data={branch_sales_data}>
                     <XAxis dataKey="BRANCH" />
                     <YAxis />
